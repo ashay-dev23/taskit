@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TaskIt — Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body class="dash-body">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-logo">Task<span>It</span></div>
+    <div class="topbar-right">
+      <span class="topbar-email">{{ email }}</span>
+      <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="dash-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-date">
+        <p class="sidebar-day" id="sideDay"></p>
+        <p class="sidebar-full" id="sideFull"></p>
+      </div>
+      <div class="sidebar-section">
+        <p class="sidebar-label">Today's Tasks</p>
+        <div id="todaySidebar" class="sidebar-tasks"></div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ADD TASK BUTTON -->
+      <div class="main-header">
+        <h1 class="main-title">My Tasks</h1>
+        <button class="btn-add" id="addTaskBtn">+ Add Task</button>
+      </div>
+
+      <!-- TASK SECTIONS -->
+      <div class="task-sections">
+
+        <div class="task-section">
+          <h2 class="section-title">📅 Today</h2>
+          <div id="todayTasks" class="task-list"></div>
+          <p class="empty-msg" id="todayEmpty">No tasks for today.</p>
+        </div>
+
+        <div class="task-section">
+          <h2 class="section-title">🗓 Upcoming</h2>
+          <div id="upcomingTasks" class="task-list"></div>
+          <p class="empty-msg" id="upcomingEmpty">No upcoming tasks.</p>
+        </div>
+
+        <div class="task-section">
+          <h2 class="section-title">✅ Completed</h2>
+          <div id="completedTasks" class="task-list"></div>
+          <p class="empty-msg" id="completedEmpty">No completed tasks yet.</p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT TASK MODAL -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Task</h2>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label>Task Title *</label>
+        <input type="text" id="taskTitle" placeholder="What needs to be done?"/>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Due Date</label>
+          <input type="date" id="taskDate"/>
+        </div>
+        <div class="form-group">
+          <label>Priority</label>
+          <select id="taskPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Color Label</label>
+        <div class="color-picker" id="colorPicker">
+          <div class="color-opt active" data-color="#22c55e" style="background:#22c55e"></div>
+          <div class="color-opt" data-color="#3b82f6" style="background:#3b82f6"></div>
+          <div class="color-opt" data-color="#f59e0b" style="background:#f59e0b"></div>
+          <div class="color-opt" data-color="#ef4444" style="background:#ef4444"></div>
+          <div class="color-opt" data-color="#8b5cf6" style="background:#8b5cf6"></div>
+          <div class="color-opt" data-color="#ec4899" style="background:#ec4899"></div>
+        </div>
+      </div>
+
+      <p class="error-msg" id="modalError"></p>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" id="cancelBtn">Cancel</button>
+        <button class="btn-primary" id="saveTaskBtn">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
